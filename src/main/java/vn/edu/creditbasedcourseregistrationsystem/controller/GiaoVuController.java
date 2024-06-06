@@ -2,6 +2,9 @@ package vn.edu.creditbasedcourseregistrationsystem.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import vn.edu.creditbasedcourseregistrationsystem.dtos.request.DanhSachSinhVienRequest;
+import vn.edu.creditbasedcourseregistrationsystem.dtos.response.SinhVienCreateResponse;
+import vn.edu.creditbasedcourseregistrationsystem.dtos.response.SinhVienLoginResponse;
 import vn.edu.creditbasedcourseregistrationsystem.model.*;
 import vn.edu.creditbasedcourseregistrationsystem.service.*;
 
@@ -13,6 +16,13 @@ import java.util.List;
 public class GiaoVuController {
     @Autowired
     private KhoaNganhService khoaNganhService;
+    @Autowired
+    private UserService userService;
+
+    @PostMapping("/createDanhSachSinhVien")
+    public List<SinhVienCreateResponse> createDanhSachSinhVien(@RequestBody DanhSachSinhVienRequest danhSachSinhVienRequest) {
+        return userService.createListSinhVien(danhSachSinhVienRequest);
+    }
 
     @GetMapping("/getKhoaById/{id}")
     public Khoa getKhoaById(@PathVariable long id) {

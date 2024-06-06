@@ -20,7 +20,6 @@ public class SinhVienCreateResponse {
     private String soDienThoai;
     private String soCCCD;
     private int khoa;
-    private Nganh nganh;
 
     public SinhVienCreateResponse(SinhVien sinhVien){
         this.maSinhVien = sinhVien.getMaSinhVien();
@@ -31,7 +30,6 @@ public class SinhVienCreateResponse {
         this.soDienThoai = sinhVien.getSoDienThoai();
         this.soCCCD = sinhVien.getSoCCCD();
         this.khoa = sinhVien.getKhoa();
-        this.nganh = sinhVien.getNganh();
     }
 
 }

@@ -12,5 +12,5 @@ import java.util.List;
 public class DanhSachSinhVienRequest {
     private long maNganh;
     private int khoa;
-    private List<SinhVienCreate> sinhVienList;
+    private List<SinhVienCreate> danhSachSinhVien;
 }

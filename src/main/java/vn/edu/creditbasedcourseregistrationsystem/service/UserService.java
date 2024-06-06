@@ -1,8 +1,7 @@
 package vn.edu.creditbasedcourseregistrationsystem.service;
 
-import vn.edu.creditbasedcourseregistrationsystem.dtos.request.DanhSachSinhVienRequest;
-import vn.edu.creditbasedcourseregistrationsystem.dtos.request.SinhVienCreate;
-import vn.edu.creditbasedcourseregistrationsystem.dtos.response.SinhVienResponse;
+import vn.edu.creditbasedcourseregistrationsystem.dtos.request.*;
+import vn.edu.creditbasedcourseregistrationsystem.dtos.response.*;
 import vn.edu.creditbasedcourseregistrationsystem.model.*;
 import vn.edu.creditbasedcourseregistrationsystem.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +33,9 @@ public class UserService {
         return sinhVien;
     }
 
-    public List<SinhVienResponse> createListSinhVien(DanhSachSinhVienRequest danhSachSinhVienRequest){
-        List<SinhVienResponse> sinhVienResponses = new ArrayList<>();
-        for (SinhVienCreate sinhVienCreate : danhSachSinhVienRequest.getSinhVienList()) {
+    public List<SinhVienCreateResponse> createListSinhVien(DanhSachSinhVienRequest danhSachSinhVienRequest){
+        List<SinhVienCreateResponse> sinhVienCreateResponses = new ArrayList<>();
+        for (SinhVienCreate sinhVienCreate : danhSachSinhVienRequest.getDanhSachSinhVien()) {
             SinhVien sinhVien = new SinhVien(sinhVienCreate);
             sinhVien.setKhoa(danhSachSinhVienRequest.getKhoa());
             sinhVien.setNganh(new Nganh(danhSachSinhVienRequest.getMaNganh()));
@@ -44,9 +43,9 @@ public class UserService {
             TaiKhoan tk = new TaiKhoan(sinhVien);
             tk.setMatKhau(passwordEncoder.encode("1111"));
             taiKhoanRepository.save(tk);
-            sinhVienResponses.add(new SinhVienResponse(sinhVien));
+            sinhVienCreateResponses.add(new SinhVienCreateResponse(sinhVien));
         }
-        return sinhVienResponses;
+        return sinhVienCreateResponses;
     }
 
     public GiangVien createGiangVien(GiangVien giangVien) {

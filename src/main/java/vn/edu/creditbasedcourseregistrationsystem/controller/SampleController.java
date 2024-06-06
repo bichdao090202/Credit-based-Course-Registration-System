@@ -1,7 +1,7 @@
 package vn.edu.creditbasedcourseregistrationsystem.controller;
 
 import vn.edu.creditbasedcourseregistrationsystem.dtos.request.*;
-import vn.edu.creditbasedcourseregistrationsystem.dtos.response.SinhVienResponse;
+import vn.edu.creditbasedcourseregistrationsystem.dtos.response.*;
 import vn.edu.creditbasedcourseregistrationsystem.model.*;
 import vn.edu.creditbasedcourseregistrationsystem.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ public class SampleController {
         return khoaCNTT;
     }
     @GetMapping("/createSample2")
-    public List<SinhVienResponse> createSample2() {
+    public List<SinhVienCreateResponse> createSample2() {
         DanhSachSinhVienRequest danhSachSinhVienRequest = new DanhSachSinhVienRequest();
         danhSachSinhVienRequest.setKhoa(16);
         danhSachSinhVienRequest.setMaNganh(1);
@@ -41,7 +41,7 @@ public class SampleController {
         sinhVienCreates.add(new SinhVienCreate("Lê Thị Dậu", LocalDate.of(2002,5,6), true, "Gò Vâp, TP.HCM", "0123456789", "123456789"));
         sinhVienCreates.add(new SinhVienCreate("Nguyễn Văn Tí", LocalDate.of(2002,6,5), false, "Gò Vâp, TP.HCM", "0123456789", "123456789"));
         sinhVienCreates.add(new SinhVienCreate("Nguyễn Thị Mậu", LocalDate.of(2002,7,4), false, "Gò Vâp, TP.HCM", "0123456789", "123456789"));
-        danhSachSinhVienRequest.setSinhVienList(sinhVienCreates);
+        danhSachSinhVienRequest.setDanhSachSinhVien(sinhVienCreates);
         return userService.createListSinhVien(danhSachSinhVienRequest);
     }
 
