@@ -19,7 +19,4 @@ public class GiaoVuRequest {
     private String soCCCD;
     private String soTaiKhoanNganHang;
 
-    public GiaoVuRequest(String tenGiaoVu) {
-        this.tenGiaoVu = tenGiaoVu;
-    }
 }

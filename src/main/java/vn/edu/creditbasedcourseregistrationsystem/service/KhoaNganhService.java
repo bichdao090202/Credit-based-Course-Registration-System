@@ -62,6 +62,15 @@ public class KhoaNganhService {
         return true;
     }
 
+//    public boolean deleteNganh(long id) {
+//        boolean checkHocPhan = hocPhanRepository.existsByNganh(new Nganh(id));
+//        if (checkHocPhan)
+//            return false;
+//        if (!nganhRepository.existsById(id))
+//            nganhRepository.deleteById(id);
+//        return true;
+//    }
+
     public List<Nganh> getNganhByKhoa(long id) {
         Khoa khoa = khoaRepository.findById(id).orElse(null);
         if (khoa == null)

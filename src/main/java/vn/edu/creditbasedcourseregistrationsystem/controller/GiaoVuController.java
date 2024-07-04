@@ -3,66 +3,51 @@ package vn.edu.creditbasedcourseregistrationsystem.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import vn.edu.creditbasedcourseregistrationsystem.dtos.request.DanhSachSinhVienRequest;
+import vn.edu.creditbasedcourseregistrationsystem.dtos.request.GiangVienRequest;
+import vn.edu.creditbasedcourseregistrationsystem.dtos.request.LopHocPhanRequest;
+import vn.edu.creditbasedcourseregistrationsystem.dtos.request.PhongHocRequest;
 import vn.edu.creditbasedcourseregistrationsystem.dtos.response.SinhVienCreateResponse;
-import vn.edu.creditbasedcourseregistrationsystem.dtos.response.SinhVienLoginResponse;
-import vn.edu.creditbasedcourseregistrationsystem.model.*;
+import vn.edu.creditbasedcourseregistrationsystem.model.GiangVien;
+import vn.edu.creditbasedcourseregistrationsystem.model.LopHocPhan;
+import vn.edu.creditbasedcourseregistrationsystem.model.PhongHoc;
 import vn.edu.creditbasedcourseregistrationsystem.service.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("GiaoVu")
+@RequestMapping("/giaovu")
 public class GiaoVuController {
     @Autowired
-    private KhoaNganhService khoaNganhService;
+    private UserAndAuthenticationService userAndAuthenticationService;
     @Autowired
-    private UserService userService;
+    private PhongHocService phongHocService;
+    @Autowired
+    private LopHocPhanService lopHocPhanService;
 
     @PostMapping("/createDanhSachSinhVien")
     public List<SinhVienCreateResponse> createDanhSachSinhVien(@RequestBody DanhSachSinhVienRequest danhSachSinhVienRequest) {
-        return userService.createListSinhVien(danhSachSinhVienRequest);
+        return userAndAuthenticationService.createListSinhVien(danhSachSinhVienRequest);
     }
 
-    @GetMapping("/getKhoaById/{id}")
-    public Khoa getKhoaById(@PathVariable long id) {
-        return khoaNganhService.getKhoaById(id);
+    @PostMapping ("/createGiangVien")
+    public GiangVien createGiangVien(@RequestBody GiangVienRequest giangVienCreate){
+        return userAndAuthenticationService.createGiangVien(giangVienCreate);
     }
 
-    @GetMapping("/getNganhById/{id}")
-    public Nganh getNganhById(@PathVariable long id) {
-        return khoaNganhService.getNganhById(id);
+    @PostMapping("/createListLopHocPhan")
+    public List<LopHocPhan> createListLopHocPhan(@RequestParam long maHocPhan, @RequestParam int soLuongLop, @RequestParam LocalDate ngayMoDangKy, @RequestParam int soLuongToiDa, @RequestParam long maHocKy){
+        return lopHocPhanService.createListLopHocPhan(maHocPhan, soLuongLop, ngayMoDangKy, soLuongToiDa,maHocKy);
     }
 
-    @PostMapping("/createKhoa/{tenKhoa}")
-    public Khoa createKhoa(@PathVariable String tenKhoa) {
-        return khoaNganhService.createKhoa(tenKhoa);
+    @PostMapping("/updateLopHocPhan")
+    public LopHocPhan updateLopHocPhan(@RequestBody LopHocPhanRequest lopHocPhanRequest){
+        return lopHocPhanService.updateLopHocPhan(lopHocPhanRequest);
     }
 
-    @PostMapping("/createNganh/{maKhoa}/{tenNganh}")
-    public Nganh createNganh(@PathVariable String tenNganh, @PathVariable long maKhoa) {
-        return khoaNganhService.createNganh(tenNganh, new Khoa(maKhoa));
+    @GetMapping("/getAllPhongHoc")
+    public List<PhongHoc> getAllPhongHoc() {
+        return phongHocService.getAllPhongHoc();
     }
-
-    @PostMapping("/updateTenKhoa/{maKhoa}/{tenKhoa}")
-    public Khoa updateTenKhoa(@PathVariable long maKhoa, @PathVariable String tenKhoa) {
-        return khoaNganhService.updateTenKhoa(maKhoa, tenKhoa);
-    }
-
-    @PostMapping("/updateTenNganh/{maNganh}/{tenNganh}")
-    public Nganh updateTenNganh(@PathVariable long maNganh, @PathVariable String tenNganh) {
-        return khoaNganhService.updateTenNganh(maNganh, tenNganh);
-    }
-
-    @PostMapping("/deleteKhoa/{id}")
-    public boolean deleteKhoa(@PathVariable long id) {
-        return khoaNganhService.deleteKhoa(id);
-    }
-
-    @GetMapping("/getNganhByKhoa/{id}")
-    public List<Nganh> getNganhByKhoa(@PathVariable long id) {
-        return khoaNganhService.getNganhByKhoa(id);
-    }
-
-
 }

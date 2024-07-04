@@ -7,12 +7,24 @@ localhost:8080/Sample/createSample1
 ```
 
 * SinhVien:
-    * [GET] [/SinhVien/login](#SinhVien/login)
+    * [GET] [/SinhVien/login](#SinhVien/login) - 
+    * [POST] [/SinhVien/dangKyHocPhan](#SinhVien/dangKyHocPhan)
+    * [GET] [/SinhVien/getLichHoc](#SinhVien/getLichHoc)
+    * [GET] [/SinhVien/getKetQuaHocTap](#SinhVien/getKetQuaHocTap)
+    * [GET] [/SinhVien/getChuongTrinhHoc](#SinhVien/getChuongTrinhHoc)
+* GiangVien: 
+    * [POST] [/GiangVien/nhapDiem](#GiangVien/nhapDiem)
+    * [GET] [/GiangVien/getLichDay](#GiangVien/getLichDay)
 * GiaoVu:
     * [POST] [/GiaoVu/createDanhSachSinhVien](#GiaoVu/createDanhSachSinhVien)
-      
-  
-[Menu Item Text](#h)
+    * [POST] [/GiaoVu/createPhongHoc](#GiaoVu/createPhongHoc)
+    * [POST] [/GiaoVu/createHocPhan](#GiaoVu/createHocPhan)
+    * [POST] [/GiaoVu/createLopHocPhan](#GiaoVu/createLopHocPhan)
+    * Tạo niên giám
+
+- [Giới thiệu](#giới-thiệu)
+- [Đăng ký học phần](#đăng-ký-học-phần)
+- [Kết quả học tập](#kết-quả-học-tập)
 
 ## Chi tiết API
 ### Sinh viên
@@ -50,8 +62,11 @@ Response:
 }
 ```
 
+# đăng ký học phần
+
+
 ### Giáo vụ
-#### GiaoVu/createDanhSachSinhVien
+#### createDanhSachSinhVien
 Path:
 ```http
 localhost:8080/GiaoVu/createDanhSachSinhVien
@@ -102,4 +117,15 @@ Response:
 }
 ```
 
-#### h
+## Giới thiệu
+
+Đây là phần giới thiệu.
+
+## Đăng ký học phần
+
+Đây là phần về đăng ký học phần.
+
+## Kết quả học tập
+
+Đây là phần về kết quả học tập.
+
