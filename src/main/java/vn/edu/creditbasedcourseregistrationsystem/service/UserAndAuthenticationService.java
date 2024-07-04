@@ -79,4 +79,7 @@ public class UserAndAuthenticationService {
     }
 
 
+    public List<SinhVien> getAllSinhVien() {
+        return sinhVienRepository.findAll();
+    }
 }

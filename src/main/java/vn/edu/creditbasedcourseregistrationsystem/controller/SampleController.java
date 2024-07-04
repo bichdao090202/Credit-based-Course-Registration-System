@@ -112,6 +112,7 @@ public class SampleController {
                 new SinhVienCreate("Đặng Văn Thanh", LocalDate.of(2001, 6, 30), false, "Quận 4, TP.HCM", "0956789012", "109283748")
         );
         danhSachSinhVienRequest.setDanhSachSinhVien(sinhVienCreates);
+        userAndAuthenticationService.createListSinhVien(danhSachSinhVienRequest);
         List<GiangVienRequest> giangVienRequests = Arrays.asList(
                 // 15 giảng viên ngành 1
                 new GiangVienRequest("Nguyễn Thị Lan", LocalDate.of(1985, 4, 10), true, "Quận 1, TP.HCM", "0331234567", "NguyenThiLan@gmail.com", "223344556", 1, "050093210765"),
@@ -202,6 +203,12 @@ public class SampleController {
             hocPhanService.createHocPhan(hocPhanRequest);
         }
         return true;
+    }
+
+    //Get all sinh vien
+    @GetMapping("/getAllSinhVien")
+    public List<SinhVien> getAllSinhVien() {
+        return userAndAuthenticationService.getAllSinhVien();
     }
 
 }
