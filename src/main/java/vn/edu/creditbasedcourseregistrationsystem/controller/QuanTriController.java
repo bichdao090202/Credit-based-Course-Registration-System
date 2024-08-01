@@ -2,7 +2,7 @@ package vn.edu.creditbasedcourseregistrationsystem.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import vn.edu.creditbasedcourseregistrationsystem.dtos.request.HocPhanRequest;
+import vn.edu.creditbasedcourseregistrationsystem.dtos.request.HocPhanCreateRequest;
 import vn.edu.creditbasedcourseregistrationsystem.dtos.request.PhongHocRequest;
 import vn.edu.creditbasedcourseregistrationsystem.model.*;
 import vn.edu.creditbasedcourseregistrationsystem.service.KhoaNganhService;
@@ -35,8 +35,8 @@ public class QuanTriController {
     }
 
     @PostMapping("/createHocPhan")
-    public HocPhan createHocPhan(@RequestBody HocPhanRequest hocPhanRequest) {
-        return hocPhanService.createHocPhan(hocPhanRequest);
+    public HocPhan createHocPhan(@RequestBody HocPhanCreateRequest hocPhanCreateRequest) {
+        return hocPhanService.createHocPhan(hocPhanCreateRequest);
     }
 
     @GetMapping("/getKhoaById/{id}")

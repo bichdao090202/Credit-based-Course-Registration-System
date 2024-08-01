@@ -9,7 +9,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @AllArgsConstructor
-public class HocPhanRequest {
+public class HocPhanCreateRequest {
     private String tenHocPhan;
     private long maNganh;
     private long maKhoa;

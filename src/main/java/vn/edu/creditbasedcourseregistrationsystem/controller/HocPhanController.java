@@ -25,10 +25,10 @@ public class HocPhanController {
 //        "soTinChiThucHanh": 1
 //    }
     @PostMapping("/createHocPhan")
-    public HocPhan createHocPhan(@RequestBody HocPhanRequest hocPhanRequest) {
-        if (hocPhanRequest.getMaNganh() != 0 && hocPhanRequest.getMaKhoa() != 0)
+    public HocPhan createHocPhan(@RequestBody HocPhanCreateRequest hocPhanCreateRequest) {
+        if (hocPhanCreateRequest.getMaNganh() != 0 && hocPhanCreateRequest.getMaKhoa() != 0)
             return null;     //chỉ được set 1 trong 2 mã ngành hoặc mã khoa
-        HocPhan hocPhan = hocPhanService.createHocPhan(hocPhanRequest);
+        HocPhan hocPhan = hocPhanService.createHocPhan(hocPhanCreateRequest);
         return hocPhan;
     }
 

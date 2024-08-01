@@ -1,8 +1,8 @@
 package vn.edu.creditbasedcourseregistrationsystem.controller;
 
 import vn.edu.creditbasedcourseregistrationsystem.dtos.request.*;
-import vn.edu.creditbasedcourseregistrationsystem.dtos.response.*;
 import vn.edu.creditbasedcourseregistrationsystem.model.*;
+import vn.edu.creditbasedcourseregistrationsystem.repository.KetQuaHocPhanRepository;
 import vn.edu.creditbasedcourseregistrationsystem.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -27,6 +26,8 @@ public class SampleController {
     private HocPhanService hocPhanService;
     @Autowired
     private LopHocPhanService lopHocPhanService;
+    @Autowired
+    private KetQuaHocPhanRepository ketQuaHocPhanRepository;
 
 
     //Khoa, ngành, phòng học
@@ -150,57 +151,57 @@ public class SampleController {
         for (GiangVienRequest giangVienRequest : giangVienRequests) {
             userAndAuthenticationService.createGiangVien(giangVienRequest);
         }
-        List<HocPhanRequest> hocPhanRequests = Arrays.asList(
+        List<HocPhanCreateRequest> hocPhanCreateRequests = Arrays.asList(
                 // Môn đại cương
-                new HocPhanRequest("Nhập môn Tin học", 0, 0, 2, 0),
-                new HocPhanRequest("Chứng chỉ TOEIC 450", 0, 0, 0, 0),
-                new HocPhanRequest("Kỹ năng làm việc nhóm", 0, 0, 2, 0),
-                new HocPhanRequest("Giáo dục Quốc phòng và An ninh 1", 0, 0, 4, 0),
-                new HocPhanRequest("Toán cao cấp 1", 0, 0, 2, 0),
-                new HocPhanRequest("Giáo dục thể chất 1", 0, 0, 0, 2),
-                new HocPhanRequest("Nhập môn Lập trình", 0, 0, 0, 2),
-                new HocPhanRequest("Triết học Mác - Lênin", 0, 0, 3, 0),
-                new HocPhanRequest("Tiếng anh 1", 0, 0, 3, 0),
-                new HocPhanRequest("Giáo dục thể chất 2", 0, 0, 0, 2),
-                new HocPhanRequest("Giáo dục quốc phòng và an ninh 2", 0, 0, 2, 2),
-                new HocPhanRequest("Kinh tế chính trị Mác - Lênin", 0, 0, 2, 0),
-                new HocPhanRequest("Tiếng Anh 2", 0, 0, 3, 0),
-                new HocPhanRequest("Toán cao cấp 2", 0, 0, 2, 0),
-                new HocPhanRequest("Pháp luật đại cương", 0, 0, 2, 0),
-                new HocPhanRequest("Lịch sử Đảng Cộng sản Việt Nam", 0, 0, 2, 0),
-                new HocPhanRequest("Tư tưởng Hồ Chí Minh", 0, 0, 2, 0),
+                new HocPhanCreateRequest("Nhập môn Tin học", 0, 0, 2, 0),
+                new HocPhanCreateRequest("Chứng chỉ TOEIC 450", 0, 0, 0, 0),
+                new HocPhanCreateRequest("Kỹ năng làm việc nhóm", 0, 0, 2, 0),
+                new HocPhanCreateRequest("Giáo dục Quốc phòng và An ninh 1", 0, 0, 4, 0),
+                new HocPhanCreateRequest("Toán cao cấp 1", 0, 0, 2, 0),
+                new HocPhanCreateRequest("Giáo dục thể chất 1", 0, 0, 0, 2),
+                new HocPhanCreateRequest("Nhập môn Lập trình", 0, 0, 0, 2),
+                new HocPhanCreateRequest("Triết học Mác - Lênin", 0, 0, 3, 0),
+                new HocPhanCreateRequest("Tiếng anh 1", 0, 0, 3, 0),
+                new HocPhanCreateRequest("Giáo dục thể chất 2", 0, 0, 0, 2),
+                new HocPhanCreateRequest("Giáo dục quốc phòng và an ninh 2", 0, 0, 2, 2),
+                new HocPhanCreateRequest("Kinh tế chính trị Mác - Lênin", 0, 0, 2, 0),
+                new HocPhanCreateRequest("Tiếng Anh 2", 0, 0, 3, 0),
+                new HocPhanCreateRequest("Toán cao cấp 2", 0, 0, 2, 0),
+                new HocPhanCreateRequest("Pháp luật đại cương", 0, 0, 2, 0),
+                new HocPhanCreateRequest("Lịch sử Đảng Cộng sản Việt Nam", 0, 0, 2, 0),
+                new HocPhanCreateRequest("Tư tưởng Hồ Chí Minh", 0, 0, 2, 0),
 
                 // Môn của khoa (CNTT)
-                new HocPhanRequest("Hệ Thống Máy tính", 0, 1, 3, 1),
-                new HocPhanRequest("Cấu trúc rời rạc", 0, 1, 3, 0),
-                new HocPhanRequest("Hệ Thống và Công nghệ Web", 0, 1, 2, 1),
-                new HocPhanRequest("Thống kê máy tính và ứng dụng", 0, 1, 1, 1),
-                new HocPhanRequest("Công nghệ mới trong phát triển ứng dụng CNTT", 0, 1, 1, 1),
-                new HocPhanRequest("Thực tập doanh nghiệp", 0, 1, 0, 5),
-                new HocPhanRequest("Khóa luận tốt nghiệp", 0, 1, 0, 8),
+                new HocPhanCreateRequest("Hệ Thống Máy tính", 0, 1, 3, 1),
+                new HocPhanCreateRequest("Cấu trúc rời rạc", 0, 1, 3, 0),
+                new HocPhanCreateRequest("Hệ Thống và Công nghệ Web", 0, 1, 2, 1),
+                new HocPhanCreateRequest("Thống kê máy tính và ứng dụng", 0, 1, 1, 1),
+                new HocPhanCreateRequest("Công nghệ mới trong phát triển ứng dụng CNTT", 0, 1, 1, 1),
+                new HocPhanCreateRequest("Thực tập doanh nghiệp", 0, 1, 0, 5),
+                new HocPhanCreateRequest("Khóa luận tốt nghiệp", 0, 1, 0, 8),
 
                 // Môn chuyên ngành
-                new HocPhanRequest("Kỹ thuật lập trình", 1, 0, 2, 1),
-                new HocPhanRequest("Cấu trúc dữ liệu và giải thuật", 1, 0, 3, 1),
-                new HocPhanRequest("Hệ cơ sở dữ liệu", 1, 0, 3, 1),
-                new HocPhanRequest("Lập trình hướng đối tượng", 1, 0, 2, 1),
-                new HocPhanRequest("Lập trình hướng sự kiện với công nghệ .NET", 1, 0, 3, 1),
-                new HocPhanRequest("Lập trình hướng sự kiện với công nghệ Java", 1, 0, 3, 1),
-                new HocPhanRequest("Lập trình GUI với Qt Framework", 1, 0, 3, 1),
-                new HocPhanRequest("Kỹ thuật điện tử", 1, 0, 2, 1),
-                new HocPhanRequest("Lập trình phân tích dữ liệu 1", 1, 0, 2, 1),
-                new HocPhanRequest("Khai thác dữ liệu và ứng dụng", 1, 0, 2, 1),
-                new HocPhanRequest("Lập trình WWW (Java)", 1, 0, 3, 1),
-                new HocPhanRequest("Automat & ngôn ngữ hình thức", 1, 0, 3, 0),
-                new HocPhanRequest("Nhập môn dữ liệu lớn", 1, 0, 2, 1),
-                new HocPhanRequest("Lập trình phân tích dữ liệu 2", 1, 0, 2, 1),
-                new HocPhanRequest("Tiếp thị điện tử", 1, 0, 2, 1),
-                new HocPhanRequest("Kiến trúc hướng dịch vụ và Điện toán đám mây", 1, 0, 2, 1),
-                new HocPhanRequest("Lập trình thiết bị di động nâng cao", 1, 0, 2, 1),
-                new HocPhanRequest("Quản lý dự án CNTT", 1, 0, 2, 1)
+                new HocPhanCreateRequest("Kỹ thuật lập trình", 1, 0, 2, 1),
+                new HocPhanCreateRequest("Cấu trúc dữ liệu và giải thuật", 1, 0, 3, 1),
+                new HocPhanCreateRequest("Hệ cơ sở dữ liệu", 1, 0, 3, 1),
+                new HocPhanCreateRequest("Lập trình hướng đối tượng", 1, 0, 2, 1),
+                new HocPhanCreateRequest("Lập trình hướng sự kiện với công nghệ .NET", 1, 0, 3, 1),
+                new HocPhanCreateRequest("Lập trình hướng sự kiện với công nghệ Java", 1, 0, 3, 1),
+                new HocPhanCreateRequest("Lập trình GUI với Qt Framework", 1, 0, 3, 1),
+                new HocPhanCreateRequest("Kỹ thuật điện tử", 1, 0, 2, 1),
+                new HocPhanCreateRequest("Lập trình phân tích dữ liệu 1", 1, 0, 2, 1),
+                new HocPhanCreateRequest("Khai thác dữ liệu và ứng dụng", 1, 0, 2, 1),
+                new HocPhanCreateRequest("Lập trình WWW (Java)", 1, 0, 3, 1),
+                new HocPhanCreateRequest("Automat & ngôn ngữ hình thức", 1, 0, 3, 0),
+                new HocPhanCreateRequest("Nhập môn dữ liệu lớn", 1, 0, 2, 1),
+                new HocPhanCreateRequest("Lập trình phân tích dữ liệu 2", 1, 0, 2, 1),
+                new HocPhanCreateRequest("Tiếp thị điện tử", 1, 0, 2, 1),
+                new HocPhanCreateRequest("Kiến trúc hướng dịch vụ và Điện toán đám mây", 1, 0, 2, 1),
+                new HocPhanCreateRequest("Lập trình thiết bị di động nâng cao", 1, 0, 2, 1),
+                new HocPhanCreateRequest("Quản lý dự án CNTT", 1, 0, 2, 1)
         );
-        for (HocPhanRequest hocPhanRequest : hocPhanRequests) {
-            hocPhanService.createHocPhan(hocPhanRequest);
+        for (HocPhanCreateRequest hocPhanCreateRequest : hocPhanCreateRequests) {
+            hocPhanService.createHocPhan(hocPhanCreateRequest);
         }
         return true;
     }
@@ -209,6 +210,12 @@ public class SampleController {
     @GetMapping("/getAllSinhVien")
     public List<SinhVien> getAllSinhVien() {
         return userAndAuthenticationService.getAllSinhVien();
+    }
+
+    @GetMapping("/getKetQuaHocPhan")
+    public KetQuaHocPhan getKetQuaHocPhan(){
+        KetQuaHocPhan ketQuaHocPhan = ketQuaHocPhanRepository.getReferenceById(5L);
+        return ketQuaHocPhan;
     }
 
 }

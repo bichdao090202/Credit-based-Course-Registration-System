@@ -21,16 +21,16 @@ public class HocPhanService {
     @Autowired
     private HocPhanTheoNienGiamRepository hocPhanTheoNienGiamRepository;
 
-    public HocPhan createHocPhan(HocPhanRequest hocPhanRequest) {
-        if ((hocPhanRequest.getMaKhoa() != 0 && !khoaRepository.existsById(hocPhanRequest.getMaKhoa()))
-                || (hocPhanRequest.getMaNganh() != 0 && !nganhRepository.existsById(hocPhanRequest.getMaNganh()))) {
+    public HocPhan createHocPhan(HocPhanCreateRequest hocPhanCreateRequest) {
+        if ((hocPhanCreateRequest.getMaKhoa() != 0 && !khoaRepository.existsById(hocPhanCreateRequest.getMaKhoa()))
+                || (hocPhanCreateRequest.getMaNganh() != 0 && !nganhRepository.existsById(hocPhanCreateRequest.getMaNganh()))) {
             return null;    // mã ngành hoặc mã khoa không tồn tại
         }
-        HocPhan hocPhan = new HocPhan(hocPhanRequest.getTenHocPhan(),
-                hocPhanRequest.getMaNganh() == 0 ? null : new Nganh(hocPhanRequest.getMaNganh()),
-                hocPhanRequest.getMaKhoa() == 0 ? null : new Khoa(hocPhanRequest.getMaKhoa()),
-                hocPhanRequest.getSoTinChiLyThuyet(),
-                hocPhanRequest.getSoTinChiThucHanh());
+        HocPhan hocPhan = new HocPhan(hocPhanCreateRequest.getTenHocPhan(),
+                hocPhanCreateRequest.getMaNganh() == 0 ? null : new Nganh(hocPhanCreateRequest.getMaNganh()),
+                hocPhanCreateRequest.getMaKhoa() == 0 ? null : new Khoa(hocPhanCreateRequest.getMaKhoa()),
+                hocPhanCreateRequest.getSoTinChiLyThuyet(),
+                hocPhanCreateRequest.getSoTinChiThucHanh());
         hocPhanRepository.save(hocPhan);
         return hocPhan;
     }
