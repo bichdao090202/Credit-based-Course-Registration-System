@@ -26,7 +26,7 @@ localhost:8080/Sample/createSample1
 ### Giáo vụ
 #### createDanhSachSinhVien
 Path:
-```http
+```
 localhost:8080/GiaoVu/createDanhSachSinhVien
 ```
 
@@ -85,7 +85,7 @@ Response:
 ### Giảng viên
 #### Nhập điểm cho danh sách sinh viên
 Path:
-```http
+```
 localhost:8080/giangvien/nhapDiemChoLopHocPhan
 ```
 
@@ -156,7 +156,7 @@ Response:
 ### Sinh viên
 #### SinhVien/login
 Path:
-```http
+```
 localhost:8080/sinhvien/login
 ```
 
@@ -191,7 +191,7 @@ Response:
 #### Xem kết quả học tập của sinh viên: 
 
 Path:
-```http
+```
 /sinhvien/getKetQuaSinhVien/{maSinhVien}
 ```
 
